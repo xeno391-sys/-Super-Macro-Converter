@@ -31,7 +31,9 @@
   <label for="inputText">Enter your command:</label>
   <textarea id="inputText" placeholder="Enter text string here" autofocus rows="6"></textarea>
   
-  <label><input type="checkbox" id="arkCheckbox"> Console Command</label>
+  <label for="consoleCheckbox" style="display: inline-flex; align-items: center;">
+    <input type="checkbox" id="consoleCheckbox" style="margin-right: 5px;"> Console Command
+  </label>
 
   <div class="loading" id="loadingIndicator" style="display: none;">Converting...</div>
 
@@ -46,7 +48,7 @@
     const outputEl = document.getElementById('outputText');
     const loadingEl = document.getElementById('loadingIndicator');
     const convertButton = document.getElementById('convertButton');
-    const arkCheckbox = document.getElementById('arkCheckbox');
+    const consoleCheckbox = document.getElementById('consoleCheckbox');
 
     const charMap = {
       ' ': '{Space}',
@@ -76,7 +78,8 @@
       '~': '{shift}{oem_3}',
       '[': '{oem_4}',
       '\\': '{oem_5}',
-      ']': '{oem_6}'
+      ']': '{oem_6}',
+      '\n': '{Enter}'
     };
 
     // Listen for changes in input to update button state
@@ -103,7 +106,7 @@
 
       let result = [];
 
-      if (arkCheckbox.checked) {
+      if (consoleCheckbox.checked) {
         result.push('~'); // Add tilde for Ark console
       }
 
@@ -121,7 +124,7 @@
 
       result.push('}}');
 
-      if (arkCheckbox.checked) {
+      if (consoleCheckbox.checked) {
         result.push('{Enter}'); // Add Enter for Ark command
       }
 
