@@ -31,6 +31,8 @@
   <label for="inputText">Enter your command:</label>
   <textarea id="inputText" placeholder="Enter text string here" autofocus rows="6"></textarea>
   
+  <label><input type="checkbox" id="arkCheckbox"> Console Command</label>
+
   <div class="loading" id="loadingIndicator" style="display: none;">Converting...</div>
 
   <button onclick="convertText()" id="convertButton" disabled>Convert</button>
@@ -44,6 +46,7 @@
     const outputEl = document.getElementById('outputText');
     const loadingEl = document.getElementById('loadingIndicator');
     const convertButton = document.getElementById('convertButton');
+    const arkCheckbox = document.getElementById('arkCheckbox');
 
     const charMap = {
       ' ': '{Space}',
@@ -98,7 +101,13 @@
 
       loadingEl.style.display = 'block';  // Show loading indicator
 
-      let result = ['{{'];
+      let result = [];
+
+      if (arkCheckbox.checked) {
+        result.push('~'); // Add tilde for Ark console
+      }
+
+      result.push('{{');
 
       for (let char of text) {
         if (charMap[char]) {
@@ -111,6 +120,11 @@
       }
 
       result.push('}}');
+
+      if (arkCheckbox.checked) {
+        result.push('{Enter}'); // Add Enter for Ark command
+      }
+
       outputEl.textContent = result.join('');
       loadingEl.style.display = 'none';  // Hide loading indicator
     }
