@@ -15,7 +15,12 @@ textarea {
   height: 100px;
 }
 
+.output:empty {
+  display: none;
+}
+
 .output {
+  display: block;
   margin-top: 20px;
   white-space: pre-wrap;
   background: #f0f0f0;
