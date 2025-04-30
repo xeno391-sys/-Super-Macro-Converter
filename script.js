@@ -162,3 +162,21 @@ function resetFields() {
   inputEl.classList.remove('input-error');
   updateButtonState();
 }
+
+function copyToClipboard() {
+  const outputText = document.getElementById('outputText').textContent;
+
+  if (!outputText) {
+    alert('Nothing to copy! The output is empty.');
+    return;
+  }
+
+  navigator.clipboard.writeText(outputText)
+    .then(() => {
+      alert('Output copied to clipboard!');
+    })
+    .catch(err => {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy to clipboard. Please try again.');
+    });
+}
