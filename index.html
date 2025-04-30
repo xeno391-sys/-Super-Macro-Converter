@@ -14,23 +14,25 @@
   </header>
 
   <main>
-    <label for="inputText">Enter your command:</label>
-    <textarea id="inputText" placeholder="Enter text string here" autofocus rows="6"></textarea>
+    <!-- Input Section -->
+    <div id="inputContainer">
+      <label for="inputText">Enter your command:</label>
+      <textarea id="inputText" placeholder="Enter text here" autofocus rows="6"></textarea>
 
-    <label for="consoleCheckbox" style="display: inline-flex; align-items: center;">
-      <input type="checkbox" id="consoleCheckbox" style="margin-right: 5px;"> Console Command
-    </label>
+      <label for="consoleCheckbox" style="display: inline-flex; align-items: center;">
+        <input type="checkbox" id="consoleCheckbox" style="margin-right: 5px;"> Console Command
+      </label>
 
-    <div id="loadingIndicator" role="alert" style="display: none;">
+      <button id="convertButton" onclick="convertText()" disabled>Convert</button>
+      <button class="reset-btn" onclick="resetFields()">Reset</button>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" style="display: none;" role="alert">
       <img src="spinner.gif" alt="Loading...">
     </div>
 
-    <button id="convertButton" onclick="convertText()" disabled>Convert</button>
-    <button class="reset-btn" onclick="resetFields()">Reset</button>
-
-    <output id="outputText" class="output"></output>
-    <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
-
+    <!-- History Section -->
     <section id="historyContainer">
       <h2>Conversion History</h2>
       <ul id="historyList"></ul>
