@@ -87,6 +87,7 @@ function generateMacro(text) {
 }
 
 function convertText() {
+  console.log('Convert button clicked!'); // Debugging log
   const text = inputEl.value;
   console.log(`Converting text: "${text}"`); // Debug Log
 
