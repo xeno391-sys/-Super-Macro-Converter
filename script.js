@@ -1,5 +1,4 @@
 const inputEl = document.getElementById('inputText');
-const outputEl = document.getElementById('outputText');
 const loadingEl = document.getElementById('loadingIndicator');
 const convertButton = document.getElementById('convertButton');
 const consoleCheckbox = document.getElementById('consoleCheckbox');
@@ -7,25 +6,25 @@ const historyList = document.getElementById('historyList');
 
 const charMap = {
   ' ': '{Space}',
-  '!': '{SHIFT}{1}',
-  '@': '{SHIFT}{2}',
-  '#': '{SHIFT}{3}',
-  '$': '{SHIFT}{4}',
-  '%': '{SHIFT}{5}',
-  '^': '{SHIFT}{6}',
-  '&': '{SHIFT}{7}',
-  '*': '{SHIFT}{8}',
-  '(': '{SHIFT}{9}',
-  ')': '{SHIFT}{0}',
-  '_': '{SHIFT}{-}',
-  '+': '{SHIFT}{=}',
+  '!': '{shift}{1}',
+  '@': '{shift}{2}',
+  '#': '{shift}{3}',
+  '$': '{shift}{4}',
+  '%': '{shift}{5}',
+  '^': '{shift}{6}',
+  '&': '{shift}{7}',
+  '*': '{shift}{8}',
+  '(': '{shift}{9}',
+  ')': '{shift}{0}',
+  '_': '{shift}{-}',
+  '+': '{shift}{=}',
   '{': '{shift}{oem_4}',
   '}': '{shift}{oem_6}',
   ';': '{oem_1}',
   ':': '{shift}{oem_1}',
   '"': '{shift}{oem_7}',
-  '<': '{SHIFT}{,}',
-  '>': '{SHIFT}{.}',
+  '<': '{shift}{,}',
+  '>': '{shift}{.}',
   '?': '{shift}{oem_2}',
   '|': '{shift}{oem_5}',
   '/': '{oem_2}',
@@ -51,7 +50,7 @@ function updateButtonState() {
 function validateInput(text) {
   if (text.trim() === '') {
     inputEl.classList.add('input-error');
-    outputEl.textContent = '⚠️ Please enter some text to convert.';
+    alert('⚠️ Please enter some text to convert.');
     return false;
   }
   inputEl.classList.remove('input-error');
@@ -72,7 +71,7 @@ function generateMacro(text) {
     if (charMap[char]) {
       result.push(charMap[char]);
     } else if (char >= 'A' && char <= 'Z') {
-      result.push('{SHIFT}{' + char.toLowerCase() + '}');
+      result.push('{shift}{' + char.toLowerCase() + '}');
     } else {
       result.push('{' + char + '}');
     }
@@ -101,10 +100,6 @@ function convertText() {
   const macro = generateMacro(text);
   console.log(`Generated macro: "${macro}"`); // Debug Log
 
-  outputEl.textContent = macro;
-  outputEl.style.display = macro ? 'block' : 'none'; // Toggle visibility
-  console.log('Output field updated and visibility toggled.'); // Debug Log
-
   addHistoryItem(text, macro);
   loadingEl.style.display = 'none'; // Hide loading indicator
 }
@@ -122,7 +117,7 @@ function addHistoryItem(input, output) {
 function renderHistory() {
   historyList.innerHTML = ''; // Clear the list
 
-  history.forEach((entry, index) => {
+  history.forEach((entry) => {
     const listItem = document.createElement('li');
     listItem.classList.add('history-item');
 
@@ -137,7 +132,7 @@ function renderHistory() {
     const copyBtn = document.createElement('button');
     copyBtn.classList.add('copy-history-btn');
     copyBtn.textContent = 'Copy';
-    copyBtn.onclick = () => copyOutput(entry.output);
+    copyBtn.onclick = () => copyOutput(entry.output, copyBtn); // Pass button reference
 
     listItem.appendChild(header);
     listItem.appendChild(outputDiv);
@@ -147,36 +142,30 @@ function renderHistory() {
   });
 }
 
-function copyOutput(output) {
+function copyOutput(output, buttonElement) {
+  if (!output) {
+    console.error('No output to copy.');
+    return;
+  }
+
   navigator.clipboard.writeText(output)
-    .then(() => alert('Output copied to clipboard!'))
+    .then(() => {
+      // Change button text to "Copied to clipboard"
+      const originalText = buttonElement.textContent;
+      buttonElement.textContent = 'Copied to clipboard';
+
+      // Revert back to original text after 2 seconds
+      setTimeout(() => {
+        buttonElement.textContent = originalText;
+      }, 2000);
+    })
     .catch(err => {
-      console.error('Copy failed:', err);
-      alert('Copy failed. Please try again.');
+      console.error('Failed to copy:', err);
     });
 }
 
 function resetFields() {
   inputEl.value = '';
-  outputEl.textContent = '';
   inputEl.classList.remove('input-error');
   updateButtonState();
-}
-
-function copyToClipboard() {
-  const outputText = document.getElementById('outputText').textContent;
-
-  if (!outputText) {
-    alert('Nothing to copy! The output is empty.');
-    return;
-  }
-
-  navigator.clipboard.writeText(outputText)
-    .then(() => {
-      alert('Output copied to clipboard!');
-    })
-    .catch(err => {
-      console.error('Failed to copy:', err);
-      alert('Failed to copy to clipboard. Please try again.');
-    });
 }
