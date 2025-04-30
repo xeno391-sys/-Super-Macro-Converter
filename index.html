@@ -107,10 +107,10 @@
       let result = [];
 
       if (consoleCheckbox.checked) {
-        result.push('~'); // Add tilde for Ark console
+        result.push('{shift}{oem_3}'); // Add tilde for Ark console
       }
 
-      result.push('{{');
+      result.push('{');
 
       for (let char of text) {
         if (charMap[char]) {
@@ -122,7 +122,7 @@
         }
       }
 
-      result.push('}}');
+      result.push('}');
 
       if (consoleCheckbox.checked) {
         result.push('{Enter}'); // Add Enter for Ark command
