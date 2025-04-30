@@ -44,7 +44,7 @@ inputEl.addEventListener('input', updateButtonState);
 
 function updateButtonState() {
   const text = inputEl.value.trim();
-  console.log(`Button state updated. Input text: "${text}"`); // Debugging log
+  console.log(`Input text detected: "${text}"`); // Debug Log
   convertButton.disabled = text === '';
 }
 
