@@ -1,0 +1,80 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+textarea, input, button {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 100px;
+}
+
+.output {
+  margin-top: 20px;
+  white-space: pre-wrap;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  min-height: 50px;
+}
+
+.copy-btn {
+  margin-top: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.copy-btn:hover {
+  background: #0056b3;
+}
+
+.reset-btn {
+  margin-top: 10px;
+  background: #e0e0e0;
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reset-btn:hover {
+  background: #d3d3d3;
+}
+
+.input-error {
+  border: 2px solid red;
+}
+
+.loading {
+  margin-top: 10px;
+  font-weight: bold;
+  color: orange;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  textarea, input, button {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    padding: 30px;
+    max-width: 800px;
+  }
+}
