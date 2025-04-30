@@ -3,6 +3,7 @@ const outputEl = document.getElementById('outputText');
 const loadingEl = document.getElementById('loadingIndicator');
 const convertButton = document.getElementById('convertButton');
 const consoleCheckbox = document.getElementById('consoleCheckbox');
+const historyList = document.getElementById('historyList');
 
 const charMap = {
   ' ': '{Space}',
@@ -35,6 +36,8 @@ const charMap = {
   ']': '{oem_6}',
   '\n': '{Enter}'
 };
+
+let history = []; // Store the last 10 inputs and outputs
 
 // Listen for changes in input to update button state
 inputEl.addEventListener('input', updateButtonState);
@@ -94,14 +97,52 @@ function convertText() {
   const macro = generateMacro(text);
   outputEl.textContent = macro;
 
+  addHistoryItem(text, macro);
+
   loadingEl.style.display = 'none'; // Hide loading indicator
 }
 
-function copyToClipboard() {
-  const text = outputEl.textContent;
-  if (!text || text.startsWith('⚠️')) return;
-  navigator.clipboard.writeText(text)
-    .then(() => alert('Macro copied to clipboard!'))
+function addHistoryItem(input, output) {
+  // Add to history and trim to the last 10 entries
+  history.unshift({ input, output });
+  if (history.length > 10) {
+    history.pop();
+  }
+
+  renderHistory();
+}
+
+function renderHistory() {
+  historyList.innerHTML = ''; // Clear the list
+
+  history.forEach((entry, index) => {
+    const listItem = document.createElement('li');
+    listItem.classList.add('history-item');
+
+    const header = document.createElement('div');
+    header.classList.add('history-header');
+    header.textContent = `Input: ${entry.input}`;
+
+    const outputDiv = document.createElement('div');
+    outputDiv.classList.add('history-output');
+    outputDiv.textContent = entry.output;
+
+    const copyBtn = document.createElement('button');
+    copyBtn.classList.add('copy-history-btn');
+    copyBtn.textContent = 'Copy';
+    copyBtn.onclick = () => copyOutput(entry.output);
+
+    listItem.appendChild(header);
+    listItem.appendChild(outputDiv);
+    listItem.appendChild(copyBtn);
+
+    historyList.appendChild(listItem);
+  });
+}
+
+function copyOutput(output) {
+  navigator.clipboard.writeText(output)
+    .then(() => alert('Output copied to clipboard!'))
     .catch(err => {
       console.error('Copy failed:', err);
       alert('Copy failed. Please try again.');
