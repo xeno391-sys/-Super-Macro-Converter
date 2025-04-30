@@ -61,9 +61,10 @@ function validateInput(text) {
 function generateMacro(text) {
   console.log(`Generating macro for: "${text}"`); // Debug Log
   let result = [];
-  // Existing logic...
-  return result.join('');
-}
+
+  if (consoleCheckbox.checked) {
+    result.push('{shift}{oem_3}'); // Add tilde for Ark console
+  }
 
   result.push('{');
 
