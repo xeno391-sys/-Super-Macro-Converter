@@ -44,6 +44,7 @@ inputEl.addEventListener('input', updateButtonState);
 
 function updateButtonState() {
   const text = inputEl.value.trim();
+  console.log(`Button state updated. Input text: "${text}"`); // Debugging log
   convertButton.disabled = text === '';
 }
 
@@ -96,6 +97,9 @@ function convertText() {
 
   const macro = generateMacro(text);
   outputEl.textContent = macro;
+
+  // Show the output element if it has content
+  outputEl.style.display = macro ? 'block' : 'none';
 
   addHistoryItem(text, macro);
 
