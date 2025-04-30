@@ -59,11 +59,11 @@ function validateInput(text) {
 }
 
 function generateMacro(text) {
+  console.log(`Generating macro for: "${text}"`); // Debug Log
   let result = [];
-
-  if (consoleCheckbox.checked) {
-    result.push('{shift}{oem_3}'); // Add tilde for Ark console
-  }
+  // Existing logic...
+  return result.join('');
+}
 
   result.push('{');
 
@@ -88,21 +88,22 @@ function generateMacro(text) {
 
 function convertText() {
   const text = inputEl.value;
+  console.log(`Converting text: "${text}"`); // Debug Log
 
   if (!validateInput(text)) {
+    console.log('Validation failed.'); // Debug Log
     return;
   }
 
   loadingEl.style.display = 'block'; // Show loading indicator
-
   const macro = generateMacro(text);
-  outputEl.textContent = macro;
+  console.log(`Generated macro: "${macro}"`); // Debug Log
 
-  // Show the output element if it has content
-  outputEl.style.display = macro ? 'block' : 'none';
+  outputEl.textContent = macro;
+  outputEl.style.display = macro ? 'block' : 'none'; // Toggle visibility
+  console.log('Output field updated and visibility toggled.'); // Debug Log
 
   addHistoryItem(text, macro);
-
   loadingEl.style.display = 'none'; // Hide loading indicator
 }
 
