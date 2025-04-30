@@ -131,3 +131,7 @@ textarea {
 .copy-history-btn:hover {
   background: #0056b3;
 }
+
+.output:empty {
+  display: none;
+}
