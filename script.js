@@ -5,6 +5,7 @@ const consoleCheckbox = document.getElementById('consoleCheckbox');
 const historyList = document.getElementById('historyList');
 
 const charMap = {
+// Standard characters
   ' ': '{Space}',
   '!': '{shift}{1}',
   '@': '{shift}{2}',
@@ -36,6 +37,93 @@ const charMap = {
   '\n': '{Enter}'
 };
 
+  // Top row digits
+  '0': '{{VK_0}}',
+  '1': '{{VK_1}}',
+  '2': '{{VK_2}}',
+  '3': '{{VK_3}}',
+  '4': '{{VK_4}}',
+  '5': '{{VK_5}}',
+  '6': '{{VK_6}}',
+  '7': '{{VK_7}}',
+  '8': '{{VK_8}}',
+  '9': '{{VK_9}}',
+
+  // Numpad operators
+  'Num*': '{{MULTIPLY}}',
+  'Num+': '{{ADD}}',
+  'Num-': '{{SUBTRACT}}',
+  'Num.': '{{DECIMAL}}',
+  'Num/': '{{DIVIDE}}',
+
+  // Control keys
+  'Backspace': '{{BACK}}',
+  'Tab': '{{TAB}}',
+
+  // Modifier keys
+  'Shift': '{{SHIFT}}',
+  'Ctrl': '{{CTRL}}',
+  'Alt': '{{ALT}}',
+
+  // Arrow keys
+  'Up': '{{UP}}',
+  'Down': '{{DOWN}}',
+  'Left': '{{LEFT}}',
+  'Right': '{{RIGHT}}',
+
+  // Function keys (F1–F24)
+  'F1': '{{f1}}',
+  'F2': '{{f2}}',
+  'F3': '{{f3}}',
+  'F4': '{{f4}}',
+  'F5': '{{f5}}',
+  'F6': '{{f6}}',
+  'F7': '{{f7}}',
+  'F8': '{{f8}}',
+  'F9': '{{f9}}',
+  'F10': '{{f10}}',
+  'F11': '{{f11}}',
+  'F12': '{{f12}}',
+  'F13': '{{f13}}',
+  'F14': '{{f14}}',
+  'F15': '{{f15}}',
+  'F16': '{{f16}}',
+  'F17': '{{f17}}',
+  'F18': '{{f18}}',
+  'F19': '{{f19}}',
+  'F20': '{{f20}}',
+  'F21': '{{f21}}',
+  'F22': '{{f22}}',
+  'F23': '{{f23}}',
+  'F24': '{{f24}}',
+
+  // Windows media/browser keys
+  'Browser Back': '{{BROWSER_BACK}}',
+  'Browser Forward': '{{BROWSER_FORWARD}}',
+  'Browser Home': '{{BROWSER_HOME}}',
+  'Browser Refresh': '{{BROWSER_REFRESH}}',
+  'Browser Stop': '{{BROWSER_STOP}}',
+  'Browser Search': '{{BROWSER_SEARCH}}',
+  'Browser Favorites': '{{BROWSER_FAVORITES}}',
+  'Next Track': '{{MEDIA_NEXT_TRACK}}',
+  'Previous Track': '{{MEDIA_PREV_TRACK}}',
+  'Play / Pause': '{{MEDIA_PLAY_PAUSE}}',
+  'Stop': '{{MEDIA_STOP}}',
+  'Volume Up': '{{VOLUME_UP}}',
+  'Volume Down': '{{VOLUME_DOWN}}',
+  'Mute': '{{VOLUME_MUTE}}'
+};
+
+const macroTemplates = {
+  // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
+  'Pause': '{{PAUSE:00}}',  // Default to .5 second
+  'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}',
+  'KeyDown': '{{KeyDown:F1}}',
+  'KeyUp': '{{KeyUp:F1}}',
+  'Mouse Save Position': '{{MSAVEPOS}}',
+  'Mouse Load Position': '{{MLOADPOS}}'
+};
+
 let history = []; // Store the last 10 inputs and outputs
 
 // Listen for changes in input to update button state
@@ -62,7 +150,7 @@ function generateMacro(text) {
   let result = [];
 
   if (consoleCheckbox.checked) {
-    result.push('{shift}{oem_3}'); // Add tilde for Ark console
+    result.push('{{shift}{oem_3}}{{PAUSE:200}}'); // Add tilde for Ark console
   }
 
   result.push('{');
@@ -84,6 +172,12 @@ function generateMacro(text) {
   }
 
   return result.join('');
+}
+
+function insertMacro(macro) {
+  const input = document.getElementById('inputText');
+  input.value += macro;
+  input.dispatchEvent(new Event('input')); // Trigger reprocessing
 }
 
 function convertText() {
