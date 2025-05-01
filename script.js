@@ -118,8 +118,8 @@ const charMap = {
 
 const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-  'Pause': '{{PAUSE:00}}',  // Default to .5 second
-  'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}',
+  'Pause': '{{PAUSE:200}}',  // Default to .2 second
+  //'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}', //Commented out until variable input is addressed
   'KeyDown': '{{KeyDown:F1}}',
   'KeyUp': '{{KeyUp:F1}}',
   'Mouse Save Position': '{{MSAVEPOS}}',
@@ -152,7 +152,7 @@ function generateMacro(text) {
   let result = [];
 
   if (consoleCheckbox.checked) {
-    result.push('{{shift}{oem_3}}{{PAUSE:200}}'); // Add tilde for Ark console
+    result.push('{{shift}{oem_3}}{{PAUSE:200}}'); // Add tilde and a 200ms pause for Ark console
   }
 
   result.push('{');
