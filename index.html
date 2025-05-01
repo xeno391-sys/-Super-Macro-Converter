@@ -19,21 +19,23 @@
       <label for="inputText">Enter your command:</label>
       <textarea id="inputText" placeholder="Enter text here" autofocus rows="6"></textarea>
 
-<div id="macroButtonPanel">
-  <p><strong>Insert Advanced Command:</strong></p>
-  <div class="macro-buttons">
-    <button type="button" onclick="insertMacro('{{PAUSE:1000}}')">Pause</button>
-	<button type="button" onclick="insertMacro('{{KeyPress:$Var1:$Var2}}')" title="Simulate key $Var1 repeated $Var2 times">KeyPress ($Var1 x $Var2)</button>
-    <button type="button" onclick="insertMacro('{{KeyDown:w}}')">KeyDown w</button>
-    <button type="button" onclick="insertMacro('{{KeyUp:w}}')">KeyUp w</button>
-    <button type="button" onclick="insertMacro('{{MSAVEPOS}}')">Mouse Save</button>
-    <button type="button" onclick="insertMacro('{{MLOADPOS}}')">Mouse Load</button>
-  </div>
-</div>
+ <!-- Console Command Checkbox -->
+  <label for="consoleCheckbox" style="display: inline-flex; align-items: center;">
+    <input type="checkbox" id="consoleCheckbox" style="margin-right: 5px;"> Console Command
+  </label>
 
-      <label for="consoleCheckbox" style="display: inline-flex; align-items: center;">
-        <input type="checkbox" id="consoleCheckbox" style="margin-right: 5px;"> Console Command
-      </label>
+  <!-- Advanced Commands Section -->
+  <div id="macroButtonPanel">
+    <p><strong>Insert Advanced Command:</strong></p>
+    <div class="macro-buttons">
+      <button type="button" onclick="insertMacro('{{PAUSE:1000}}')">Pause</button>
+      <button type="button" onclick="insertMacro('{{KeyPress:$Var1:$Var2}}')" title="Simulate key $Var1 repeated $Var2 times">KeyPress ($Var1 x $Var2)</button>
+      <button type="button" onclick="insertMacro('{{KeyDown:w}}')">KeyDown w</button>
+      <button type="button" onclick="insertMacro('{{KeyUp:w}}')">KeyUp w</button>
+      <button type="button" onclick="insertMacro('{{MSAVEPOS}}')">Mouse Save</button>
+      <button type="button" onclick="insertMacro('{{MLOADPOS}}')">Mouse Load</button>
+    </div>
+  </div>
 
       <button id="convertButton" onclick="convertText()" disabled>Convert</button>
       <button class="reset-btn" onclick="resetFields()">Reset</button>
