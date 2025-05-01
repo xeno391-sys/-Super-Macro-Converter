@@ -1,3 +1,5 @@
+console.log('script.js loaded successfully'); // Confirm script loading
+
 const inputEl = document.getElementById('inputText');
 const loadingEl = document.getElementById('loadingIndicator');
 const convertButton = document.getElementById('convertButton');
@@ -263,3 +265,11 @@ function resetFields() {
   inputEl.classList.remove('input-error');
   updateButtonState();
 }
+
+function insertMacro(macro) {
+  const input = document.getElementById('inputText');
+  input.value += macro;
+  input.dispatchEvent(new Event('input')); // Trigger reprocessing
+}
+
+window.insertMacro = insertMacro; // Make the function globally accessible
