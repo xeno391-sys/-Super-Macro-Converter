@@ -1,0 +1,8 @@
+Help & Resources
+=================
+
+Find useful resources and documentation to help you use this repository.
+
+- Super Macro Commands Documentation: https://docs.barraider.com/faqs/supermacro/commands/
+
+© 2025 Super Macro Converter Team
