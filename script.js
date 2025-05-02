@@ -7,7 +7,7 @@ const consoleCheckbox = document.getElementById('consoleCheckbox');
 const historyList = document.getElementById('historyList');
 
 const charMap = {
-// Standard characters
+  // Standard characters
   ' ': '{Space}',
   '!': '{shift}{1}',
   '@': '{shift}{2}',
@@ -36,8 +36,7 @@ const charMap = {
   '[': '{oem_4}',
   '\\': '{oem_5}',
   ']': '{oem_6}',
-  '\n': '{Enter}'
-};
+  '\n': '{Enter}',
 
   // Top row digits
   '0': '{{VK_0}}',
