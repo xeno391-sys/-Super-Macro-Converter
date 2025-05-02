@@ -181,6 +181,8 @@ function insertMacro(macro) {
   input.dispatchEvent(new Event('input')); // Trigger reprocessing
 }
 
+window.insertMacro = insertMacro; // Expose the function globally
+
 function convertText() {
   console.log('Convert button clicked!'); // Debugging log
   const text = inputEl.value;
@@ -270,5 +272,3 @@ function insertMacro(macro) {
   input.value += macro;
   input.dispatchEvent(new Event('input')); // Trigger reprocessing
 }
-
-window.insertMacro = insertMacro; // Make the function globally accessible
