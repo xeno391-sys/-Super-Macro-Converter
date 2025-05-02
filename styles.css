@@ -67,6 +67,15 @@ textarea {
   color: orange;
 }
 
+.inline-checkbox {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inline-checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
