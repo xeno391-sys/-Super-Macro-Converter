@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="description" content="Convert text into macros for the Super Macro plugin for Stream Deck.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Super Macro, Stream Deck, Converter, Macros">
   <title>Super Macro Converter</title>
-  <script type="module" src="script.js" defer></script>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Super Macro Converter</h1>
-  <textarea id="inputText" placeholder="Enter your command"></textarea>
-  <button id="convertButton">Convert</button>
-  <div id="outputText" class="output"></div>
+  <header>
+    <h1>Text to Super Macro Converter</h1>
+  </header>
+
+  <main>
+    <!-- Input Section -->
+    <div id="inputContainer">
+      <label for="inputText">Enter your command:</label>
+      <textarea id="inputText" placeholder="Enter text here" autofocus rows="6"></textarea>
+
+ <!-- Console Command Checkbox -->
+ <label for="consoleCheckbox" class="inline-checkbox">
+  <input type="checkbox" id="consoleCheckbox"> Console Command
+</label>
+
+  <!-- Advanced Commands Section -->
+  <div id="macroButtonPanel">
+    <p><strong>Insert Advanced Command:</strong></p>
+    <div class="macro-buttons">
+      <button type="button" onclick="insertMacro('{{PAUSE:200}}')">Pause 200ms</button>
+     <!--<button type="button" onclick="insertMacro('{{KeyPress:$Var1:$Var2}}')" title="Simulate key $Var1 repeated $Var2 times">KeyPress ($Var1 x $Var2)</button> 
+Commented out because variable input handling for $Var1 and $Var2 is not yet implemented.
+-->
+      <button type="button" onclick="insertMacro('{{KeyDown:w}}')">KeyDown w</button>
+      <button type="button" onclick="insertMacro('{{KeyUp:w}}')">KeyUp w</button>
+      <button type="button" onclick="insertMacro('{{MSAVEPOS}}')">Mouse Save</button>
+      <button type="button" onclick="insertMacro('{{MLOADPOS}}')">Mouse Load</button>
+    </div>
+  </div>
+
+      <button id="convertButton" onclick="convertText()" disabled>Convert</button>
+      <button class="reset-btn" onclick="resetFields()">Reset</button>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" style="display: none;" role="alert">
+      <img src="spinner.gif" alt="Loading...">
+    </div>
+
+    <!-- History Section -->
+    <section id="historyContainer">
+      <h2>Conversion History</h2>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
