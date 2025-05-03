@@ -117,8 +117,8 @@ const charMap = {
 
 const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-  'Pause': '{PAUSE:200}',  // Default to .2 second
-  //'KeyPress (variables)': '{KeyPress:$Var1:$Var2}', //Commented out until variable input is addressed
+  'Pause': '{{PAUSE:200}}',  // Default to .2 second
+  //'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}', //Commented out until variable input is addressed
   'KeyDown': '{KeyDown:F1}',
   'KeyUp': '{KeyUp:F1}',
   'Mouse Save Position': '{MSAVEPOS}',
@@ -157,19 +157,21 @@ function generateMacro(text) {
   result.push('{');
 
   for (let char of text) {
-    if (char >= 'A' && char <= 'Z') {
-      result.push('{shift}{' + char.toLowerCase() + '}');
-    } else if (charMap[char]) {
+    if (charMap[char]) {
       result.push(charMap[char]);
+    } else {
+    if (char >= 'A' && char <= 'Z') {
+      result.push('}{{SHIFT}{' + char.toLowerCase() + '}}{');
     } else {
       result.push('{' + char + '}');
     }
+  }
   }
 
   result.push('}');
 
   if (consoleCheckbox.checked) {
-    result.push('{Enter}'); // Add Enter for Ark command
+    result.push('{{Enter}}'); // Add Enter for Ark command
   }
 
   return result.join('');
