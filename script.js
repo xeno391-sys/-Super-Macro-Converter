@@ -62,9 +62,9 @@ const charMap = {
   'Tab': '{{TAB}}',
 
   // Modifier keys
-  'Shift': '{{SHIFT}}',
-  'Ctrl': '{{CTRL}}',
-  'Alt': '{{ALT}}',
+  'Shift': '{{shift}}',
+  'Ctrl': '{{ctrl}}',
+  'Alt': '{{alt}}',
 
   // Arrow keys
   'Up': '{{UP}}',
@@ -151,7 +151,7 @@ function generateMacro(text) {
   let result = [];
 
   if (consoleCheckbox.checked) {
-    result.push('{{shift}{oem_3}}{{PAUSE:200}}'); // Add tilde and a 200ms pause for Ark console
+    result.push('{{oem_3}{PAUSE:200}}'); // Add tilde and a 200ms pause for Ark console
   }
 
   result.push('{');
@@ -159,8 +159,6 @@ function generateMacro(text) {
   for (let char of text) {
     if (charMap[char]) {
       result.push(charMap[char]);
-    } else if (char >= 'A' && char <= 'Z') {
-      result.push('{shift}{' + char.toLowerCase() + '}');
     } else {
       result.push('{' + char + '}');
     }
@@ -265,10 +263,4 @@ function resetFields() {
   inputEl.value = '';
   inputEl.classList.remove('input-error');
   updateButtonState();
-}
-
-function insertMacro(macro) {
-  const input = document.getElementById('inputText');
-  input.value += macro;
-  input.dispatchEvent(new Event('input')); // Trigger reprocessing
 }
