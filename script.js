@@ -162,13 +162,11 @@ function generateMacro(text) {
   for (let char of text) {
     if (charMap[char]) {
       result.push(charMap[char]);
-    } else {
-    if (char >= 'A' && char <= 'Z') {
+    } else if (char >= 'A' && char <= 'Z') {
       result.push('}{' + '{SHIFT}{' + char.toLowerCase() + '}' + '}{'); // Escaped to prevent Jekyll Liquid parsing
     } else {
       result.push('{' + char + '}');
     }
-  }
   }
 
   result.push('}');
