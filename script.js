@@ -154,7 +154,7 @@ function generateMacro(text) {
   let result = [];
 
   if (consoleCheckbox.checked) {
-    result.push('{{oem_3}{PAUSE:200}}'); // Add tilde and a 200ms pause for Ark console
+    result.push('{' + '{oem_3}{PAUSE:200}' + '}'); // Add tilde and a 200ms pause for Ark console // Prevent Jekyll Liquid parsing by avoiding literal {{}} 
   }
 
   result.push('{');
