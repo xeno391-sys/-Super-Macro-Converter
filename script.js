@@ -120,8 +120,7 @@ const charMap = {
 
 const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-  $1,$2$3$4: '{KeyDown:F1}',
-  'KeyUp': '{KeyUp:F1}',
+    'KeyUp': '{KeyUp:F1}',
   'Mouse Save Position': '{MSAVEPOS}',
   'Mouse Load Position': '{MLOADPOS}'
 };
