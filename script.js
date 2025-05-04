@@ -120,9 +120,7 @@ const charMap = {
 
 const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-  'Pause': '{' + '{PAUSE:200}' + '}' // Escaped to prevent Jekyll Liquid parsing,  // Default to .2 second
-  //'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}', //Commented out until variable input is addressed
-  'KeyDown': '{KeyDown:F1}',
+  $1,$2$3$4: '{KeyDown:F1}',
   'KeyUp': '{KeyUp:F1}',
   'Mouse Save Position': '{MSAVEPOS}',
   'Mouse Load Position': '{MLOADPOS}'
