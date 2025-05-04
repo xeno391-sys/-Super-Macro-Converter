@@ -115,15 +115,15 @@ const charMap = {
   'Stop': '{MEDIA_STOP}',
   'Volume Up': '{VOLUME_UP}',
   'Volume Down': '{VOLUME_DOWN}',
-  'Mute': '{VOLUME_MUTE}'
+  'Mute': '{VOLUME_MUTE}',
 };
 
-const macroTemplates = {
+// const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-    'KeyUp': '{KeyUp:F1}',
-  'Mouse Save Position': '{MSAVEPOS}',
-  'Mouse Load Position': '{MLOADPOS}'
-};
+   // 'KeyUp': '{KeyUp:F1}',
+  //'Mouse Save Position': '{MSAVEPOS}',
+ // 'Mouse Load Position': '{MLOADPOS}'
+// }; //Entire section commented out for future implementation
 
 let history = []; // Store the last 10 inputs and outputs
 
