@@ -120,7 +120,7 @@ const charMap = {
 
 const macroTemplates = {
   // 🛑 Requires user input (XXXX, YYYY, ZZZZ) to complete
-  'Pause': '{{PAUSE:200}}',  // Default to .2 second
+  'Pause': '{' + '{PAUSE:200}' + '}' // Escaped to prevent Jekyll Liquid parsing,  // Default to .2 second
   //'KeyPress (variables)': '{{KeyPress:$Var1:$Var2}}', //Commented out until variable input is addressed
   'KeyDown': '{KeyDown:F1}',
   'KeyUp': '{KeyUp:F1}',
@@ -164,7 +164,7 @@ function generateMacro(text) {
       result.push(charMap[char]);
     } else {
     if (char >= 'A' && char <= 'Z') {
-      result.push('}{{SHIFT}{' + char.toLowerCase() + '}}{');
+      result.push('}{' + '{SHIFT}{' + char.toLowerCase() + '}' + '}{'); // Escaped to prevent Jekyll Liquid parsing
     } else {
       result.push('{' + char + '}');
     }
@@ -174,7 +174,7 @@ function generateMacro(text) {
   result.push('}');
 
   if (consoleCheckbox.checked) {
-    result.push('{{Enter}}'); // Add Enter for Ark command
+    result.push('{' + '{Enter}' + '}'); // Escaped to prevent Jekyll Liquid parsing // Add Enter for Ark command
   }
 
   return result.join('');
