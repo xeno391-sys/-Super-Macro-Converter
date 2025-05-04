@@ -1,3 +1,6 @@
+---
+---
+
 console.log('script.js loaded successfully'); // Confirm script loading
 
 const inputEl = document.getElementById('inputText');
