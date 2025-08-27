@@ -1,6 +1,8 @@
 ---
+layout: null
 ---
 
+{% raw %}
 console.log('script.js loaded successfully'); // Confirm script loading
 
 const inputEl = document.getElementById('inputText');
@@ -286,6 +288,8 @@ function resetFields() {
   inputEl.classList.remove('input-error');
   updateButtonState();
 }
+{% endraw %}
+
 
 
 
