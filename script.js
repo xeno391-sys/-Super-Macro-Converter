@@ -11,7 +11,7 @@ const historyList = document.getElementById('historyList');
 
 const charMap = {
   // Standard characters
-  ' ': '{Space}',
+  ' ': '}{{Space}}{',
   '!': '{shift}{1}',
   '@': '{shift}{2}',
   '#': '{shift}{3}',
@@ -40,6 +40,7 @@ const charMap = {
   '\\': '{oem_5}',
   ']': '{oem_6}',
   '\n': '{Enter}',
+  '.':  '{oem_period}'
 
   // Top row digits
   '0': '{VK_0}',
@@ -53,12 +54,24 @@ const charMap = {
   '8': '{VK_8}',
   '9': '{VK_9}',
 
+  //NumPad digits
+'Num 0': '{NUMPAD0}',
+'Num 1': '{NUMPAD1}',
+'Num 2': '{NUMPAD2}',
+'Num 3': '{NUMPAD3}',
+'Num 4': '{NUMPAD4}',
+'Num 5': '{NUMPAD5}',
+'Num 6': '{NUMPAD6}',
+'Num 7': '{NUMPAD7}',
+'Num 8': '{NUMPAD8}',
+'Num 9': '{NUMPAD9}',
+
   // Numpad operators
-  'Num*': '{MULTIPLY}',
-  'Num+': '{ADD}',
-  'Num-': '{SUBTRACT}',
-  'Num.': '{DECIMAL}',
-  'Num/': '{DIVIDE}',
+  'Num *': '{MULTIPLY}',
+  'Num +': '{ADD}',
+  'Num -': '{SUBTRACT}',
+  'Num .': '{DECIMAL}',
+  'Num /': '{DIVIDE}',
 
   // Control keys
   'Backspace': '{BACK}',
@@ -266,3 +279,4 @@ function resetFields() {
   inputEl.classList.remove('input-error');
   updateButtonState();
 }
+
