@@ -40,7 +40,7 @@ const charMap = {
   '\\': '{oem_5}',
   ']': '{oem_6}',
   '\n': '{Enter}',
-  '.':  '{oem_period}'
+  '.':  '{oem_period}',
 
   // Top row digits
   '0': '{VK_0}',
@@ -55,16 +55,16 @@ const charMap = {
   '9': '{VK_9}',
 
   //NumPad digits
-'Num 0': '{NUMPAD0}',
-'Num 1': '{NUMPAD1}',
-'Num 2': '{NUMPAD2}',
-'Num 3': '{NUMPAD3}',
-'Num 4': '{NUMPAD4}',
-'Num 5': '{NUMPAD5}',
-'Num 6': '{NUMPAD6}',
-'Num 7': '{NUMPAD7}',
-'Num 8': '{NUMPAD8}',
-'Num 9': '{NUMPAD9}',
+  'Num 0': '{NUMPAD0}',
+  'Num 1': '{NUMPAD1}',
+  'Num 2': '{NUMPAD2}',
+  'Num 3': '{NUMPAD3}',
+  'Num 4': '{NUMPAD4}',
+  'Num 5': '{NUMPAD5}',
+  'Num 6': '{NUMPAD6}',
+  'Num 7': '{NUMPAD7}',
+  'Num 8': '{NUMPAD8}',
+  'Num 9': '{NUMPAD9}',
 
   // Numpad operators
   'Num *': '{MULTIPLY}',
@@ -176,6 +176,11 @@ function generateMacro(text) {
       result.push('}{' + '{SHIFT}{' + char.toLowerCase() + '}' + '}{'); // Escaped to prevent Jekyll Liquid parsing
     } else {
       result.push('{' + char + '}');
+    }
+
+    // 🔑 Add pause if next char is the same
+    if (i < text.length - 1 && text[i] === text[i + 1]) {
+      result.push('{PAUSE:20}'); // Adjust ms as needed
     }
   }
 
