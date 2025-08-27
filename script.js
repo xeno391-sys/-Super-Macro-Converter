@@ -169,20 +169,22 @@ function generateMacro(text) {
 
   result.push('{');
 
-  for (let char of text) {
-    if (charMap[char]) {
-      result.push(charMap[char]);
-    } else if (char >= 'A' && char <= 'Z') {
-      result.push('}{' + '{SHIFT}{' + char.toLowerCase() + '}' + '}{'); // Escaped to prevent Jekyll Liquid parsing
-    } else {
-      result.push('{' + char + '}');
-    }
+for (let i = 0; i < text.length; i++) {
+  const char = text[i];
 
-    // 🔑 Add pause if next char is the same
-    if (i < text.length - 1 && text[i] === text[i + 1]) {
-      result.push('{PAUSE:20}'); // Adjust ms as needed
-    }
+  if (charMap[char]) {
+    result.push(charMap[char]);
+  } else if (char >= 'A' && char <= 'Z') {
+    result.push('}{' + '{SHIFT}{' + char.toLowerCase() + '}' + '}{');
+  } else {
+    result.push('{' + char + '}');
   }
+
+  // Add pause if the next char is the same
+  if (i < text.length - 1 && text[i] === text[i + 1]) {
+    result.push('{PAUSE:20}');
+  }
+}
 
   result.push('}');
 
@@ -284,4 +286,5 @@ function resetFields() {
   inputEl.classList.remove('input-error');
   updateButtonState();
 }
+
 
